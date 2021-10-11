@@ -33,10 +33,19 @@
             android:id="@+id/tvCount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="5" />
+
+        <TextView
+            android:id="@+id/tvMeasure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:text="kg" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
