@@ -1,9 +1,11 @@
 package by.kos.shoppingtasks.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import by.kos.shoppingtasks.data.ShopListRepositoryImpl
-import by.kos.shoppingtasks.domain.*
+import by.kos.shoppingtasks.domain.DeleteShopItemUseCase
+import by.kos.shoppingtasks.domain.EditShopItemUseCase
+import by.kos.shoppingtasks.domain.GetShopListUseCase
+import by.kos.shoppingtasks.domain.ShopItem
 
 class MainViewModel: ViewModel() {
 
