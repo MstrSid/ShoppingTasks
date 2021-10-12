@@ -1,7 +1,6 @@
 package by.kos.shoppingtasks.presentation
 
-import android.content.Context
-import android.graphics.Color
+import android.util.Log
 import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import by.kos.shoppingtasks.R
 import by.kos.shoppingtasks.domain.ShopItem
 
 class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>() {
+    var count = 0
 
     var shopList = listOf<ShopItem>()
         set(value) {
@@ -27,13 +27,14 @@ class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
+        Log.d("ON_CREATE_VIEWHOLDER", "onCreateViewHolder count: ${++count}")
         val layoutType =
-            if (viewType == ENABLED_VIEW_TYPE) R.layout.item_shop_enabled else R.layout.item_shop_disabled
-        val view = LayoutInflater.from(parent.context).inflate(
-            layoutType,
-            parent,
-            false
-        )
+            when (viewType) {
+                ENABLED_VIEW_TYPE -> R.layout.item_shop_enabled
+                DISABLED_VIEW_TYPE -> R.layout.item_shop_disabled
+                else -> throw RuntimeException("Unknown view type $viewType")
+            }
+        val view = LayoutInflater.from(parent.context).inflate(layoutType, parent, false)
         view.isHapticFeedbackEnabled = true
         return ShopItemViewHolder(view)
     }
@@ -46,8 +47,7 @@ class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolde
 
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
         val shopItem = shopList[position]
-        val status = if (shopItem.enabled) "Active" else "Inactive"
-        holder.tvTitle.text = "${shopItem.name}, $status"
+        holder.tvTitle.text = shopItem.name
         holder.tvCount.text = shopItem.count.toString()
         holder.tvMeasure.text = shopItem.measure
 
@@ -64,5 +64,6 @@ class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolde
     companion object {
         const val ENABLED_VIEW_TYPE = 1
         const val DISABLED_VIEW_TYPE = 0
+        const val POOL_RV_SIZE_MAX = 15
     }
 }

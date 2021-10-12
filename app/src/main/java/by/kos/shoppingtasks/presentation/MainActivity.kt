@@ -30,12 +30,21 @@ class MainActivity : AppCompatActivity() {
         viewModel.shopList.observe(this) {
             adapter.shopList = it
         }
-
     }
 
     private fun setupRecyclerView() {
         adapter = ShopListAdapter()
-        binding.rvShopList.adapter = adapter
+        with(binding.rvShopList) {
+            this.adapter = adapter
+            recycledViewPool.setMaxRecycledViews(
+                ShopListAdapter.ENABLED_VIEW_TYPE,
+                ShopListAdapter.POOL_RV_SIZE_MAX
+            )
+            recycledViewPool.setMaxRecycledViews(
+                ShopListAdapter.DISABLED_VIEW_TYPE,
+                ShopListAdapter.POOL_RV_SIZE_MAX
+            )
+        }
     }
 
 }
