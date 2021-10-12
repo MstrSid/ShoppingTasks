@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: ShopListAdapter
+    private lateinit var shopListAdapter: ShopListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +28,14 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.shopList.observe(this) {
-            adapter.shopList = it
+            shopListAdapter.shopList = it
         }
     }
 
     private fun setupRecyclerView() {
-        adapter = ShopListAdapter()
         with(binding.rvShopList) {
-            this.adapter = adapter
+            shopListAdapter = ShopListAdapter()
+            this.adapter = shopListAdapter
             recycledViewPool.setMaxRecycledViews(
                 ShopListAdapter.ENABLED_VIEW_TYPE,
                 ShopListAdapter.POOL_RV_SIZE_MAX
