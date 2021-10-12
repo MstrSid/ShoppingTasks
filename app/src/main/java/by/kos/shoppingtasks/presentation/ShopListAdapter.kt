@@ -11,8 +11,6 @@ import by.kos.shoppingtasks.R
 import by.kos.shoppingtasks.domain.ShopItem
 
 class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>() {
-    var count = 0
-
     var shopList = listOf<ShopItem>()
         set(value) {
             field = value
@@ -27,7 +25,6 @@ class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
-        Log.d("ON_CREATE_VIEWHOLDER", "onCreateViewHolder count: ${++count}")
         val layoutType =
             when (viewType) {
                 ENABLED_VIEW_TYPE -> R.layout.item_shop_enabled
