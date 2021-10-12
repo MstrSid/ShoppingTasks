@@ -1,6 +1,5 @@
 package by.kos.shoppingtasks.presentation
 
-import android.util.Log
 import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolde
             field = value
             notifyDataSetChanged()
         }
-
 
     inner class ShopItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tvTitle)
@@ -43,7 +41,9 @@ class ShopListAdapter() : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolde
     }
 
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
+
         val shopItem = shopList[position]
+
         holder.tvTitle.text = shopItem.name
         holder.tvCount.text = shopItem.count.toString()
         holder.tvMeasure.text = shopItem.measure
